@@ -1,0 +1,65 @@
+services:
+  db:
+    image: mariadb:13
+    environment:
+      TZ: ${TZ}
+      MARIADB_RANDOM_ROOT_PASSWORD: yes
+      MARIADB_DATABASE: ${DATABASE_NAME}
+      MARIADB_USER: ${DATABASE_USER}
+      MARIADB_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - ./var/mysql:/var/lib/mysql
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "/usr/local/bin/healthcheck.sh",
+          "--su-mysql",
+          "--connect",
+          "--innodb_initialized",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  redis:
+    image: redis:8.8-alpine
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
+  php:
+    environment:
+      TZ: ${TZ}
+      SERVER_NAME: "${DEFAULT_URI:-https}://${SERVER_NAME:-localhost}, php:80"
+      DEFAULT_URI: "${DEFAULT_URI:-https}://${SERVER_NAME:-localhost}:443"
+      DATABASE_HOST: db
+      DATABASE_PORT: 3306
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      MESSENGER_TRANSPORT_DSN: "redis://redis:6379/messages"
+      MAILER_DSN: ""
+      MAILER_EMAIL: ""
+      MERCURE_TRUSTED_ISSUERS: "${DEFAULT_URI:-https}://localhost"
+      MERCURE_JWT_ISSUER: "${DEFAULT_URI:-https}://localhost"
+      MERCURE_JWT_SECRET: ${MERCURE_JWT_SECRET}
+      MERCURE_PUBLISHER_JWT_KEY: ${MERCURE_JWT_SECRET}
+      MERCURE_SUBSCRIBER_JWT_KEY: ${MERCURE_JWT_SECRET}
+      MERCURE_URL: "http://php/.well-known/mercure"
+      MERCURE_PUBLIC_URL: "${DEFAULT_URI:-https}://${SERVER_NAME:-localhost}:443/.well-known/mercure"
+      SYMFONY_VERSION: ${SYMFONY_VERSION:-}
+      STABILITY: ${STABILITY:-stable}
+    volumes:
+      - ./var/frankenphp/data:/data
+      - ./var/frankenphp/config:/config
+    ports:
+      - "80:80/tcp"
+      - "443:443/tcp"
+      - "443:443/udp"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
