@@ -13,6 +13,7 @@
         "phpdocumentor/reflection-docblock": "^6.0",
         "phpdocumentor/type-resolver": "*",
         "phpstan/phpdoc-parser": "*",
+        "sensiolabs/typescript-bundle": "^0.2.2",
         "symfony/asset": "8.1.*",
         "symfony/asset-mapper": "8.1.*",
         "symfony/console": "8.1.*",
@@ -104,7 +105,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": true,
             "require": "8.1.*",
             "docker": true
         }
