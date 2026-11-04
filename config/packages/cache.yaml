@@ -1,5 +1,5 @@
 framework:
     cache:
         # Redis
-        #app: cache.adapter.redis
-        #default_redis_provider: redis://localhost
+        app: cache.adapter.redis
+        default_redis_provider: redis://localhost
