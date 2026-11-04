@@ -39,6 +39,7 @@ services:
       DATABASE_NAME: ${DATABASE_NAME}
       DATABASE_USER: ${DATABASE_USER}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      REDIS_URL: "redis://redis:6379"
       MESSENGER_TRANSPORT_DSN: "redis://redis:6379/messages"
       MAILER_DSN: ""
       MAILER_EMAIL: ""

@@ -6,6 +6,7 @@ services:
     ports:
       - "6379:6379"
   php:
+    image: ${IMAGES_PREFIX:-}app-php-dev
     build:
       context: .
       target: frankenphp_dev
