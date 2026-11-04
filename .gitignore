@@ -2,7 +2,6 @@
 
 var/
 vendor/
-bin/
 
 ###> phpunit/phpunit ###
 /phpunit.xml
