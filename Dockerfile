@@ -66,6 +66,7 @@ ENV FRANKENPHP_WORKER_CONFIG=watch
 RUN <<-EOF
 	mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 	install-php-extensions xdebug
+	addgroup -S nonroot
 	adduser -S nonroot
 	git config --system --add safe.directory /app
 EOF
