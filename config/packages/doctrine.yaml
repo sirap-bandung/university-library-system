@@ -7,7 +7,7 @@ doctrine:
         dbname:   '%env(DATABASE_NAME)%'
         driver:   pdo_mysql
 
-        server_version: '13'
+        server_version: 'mariadb-13.0.2'
 
         profiling_collect_backtrace: '%kernel.debug%'
     orm:
