@@ -38,4 +38,9 @@ return [
     '@hotwired/stimulus' => ['version' => '3.2.2'],
     '@symfony/stimulus-bundle' => ['path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js'],
     '@hotwired/turbo' => ['version' => '8.0.23'],
+    '@zxcvbn-ts/core' => ['version' => '4.2.0'],
+    '@zxcvbn-ts/language-common' => ['version' => '4.1.3'],
+    '@zxcvbn-ts/language-en' => ['version' => '4.1.1'],
+    'fastest-levenshtein' => ['version' => '1.0.16'],
+    '@zxcvbn-ts/dictionary-compression/decompress' => ['version' => '3.0.1'],
 ];
