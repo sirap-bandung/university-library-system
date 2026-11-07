@@ -8,7 +8,11 @@ scheb_two_factor:
         enabled: true
         server_name: '%env(APP_NAME)%'
         leeway: 5
-        template: security/2fa_form.html.twig   # Template used to render the authentication form
+        template: 'security/2fa_form.html.twig'   # Template used to render the authentication form
 
     email:
+        enabled: true
+        sender_email: '%env(MAILER_ACCOUNT_EMAIL)%'
+        sender_name: '%env(APP_NAME)%'
         digits: 6
+        template: 'security/2fa_form.html.twig'

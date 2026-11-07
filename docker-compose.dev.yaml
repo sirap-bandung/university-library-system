@@ -5,6 +5,18 @@ services:
   redis:
     ports:
       - "6379:6379"
+  mailpit:
+    image: axllent/mailpit
+    environment:
+      TZ: ${TZ}
+      MP_MAX_MESSAGES: 5000
+      MP_DATABASE: /data/mailpit.db
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+    volumes:
+      - ./var/mailpit:/data
+    ports:
+      - "8025:8025/tcp"
   php:
     image: ${IMAGES_PREFIX:-}app-php-dev
     build:
@@ -17,6 +29,7 @@ services:
       # See https://xdebug.org/docs/all_settings#mode
       XDEBUG_MODE: ${XDEBUG_MODE:-develop}
       APP_ENV: ${APP_ENV:-dev}
+      MAILER_DSN: "smtp://mailpit:1025"
     volumes:
       - ./:/app
       - ./frankenphp/Caddyfile:/etc/frankenphp/Caddyfile:ro
@@ -27,3 +40,6 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
     tty: true
+    depends_on:
+      mailpit:
+        condition: service_healthy
