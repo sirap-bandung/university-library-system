@@ -32,6 +32,8 @@ services:
   php:
     environment:
       TZ: ${TZ}
+      APP_NAME: ${APP_NAME}
+      APP_SECRET: ${APP_SECRET}
       SERVER_NAME: "${DEFAULT_URI:-https}://${SERVER_NAME:-localhost}, php:80"
       DEFAULT_URI: "${DEFAULT_URI:-https}://${SERVER_NAME:-localhost}:443"
       DATABASE_HOST: db
