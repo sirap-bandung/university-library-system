@@ -13,9 +13,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotCompromisedPassword;
 use Symfony\Component\Validator\Constraints\PasswordStrength;
 
-/**
- * @template-extends AbstractType<?>
- */
 class ChangePasswordFormType extends AbstractType
 {
     #[Override]
@@ -35,7 +32,7 @@ class ChangePasswordFormType extends AbstractType
                             message: 'Please enter a password',
                         ),
                         new Length(
-                            min: 12,
+                            min: 15,
                             max: 4096,
                             // max length allowed by Symfony for security reasons
                             minMessage: 'Your password should be at least {{ limit }} characters',
@@ -52,8 +49,7 @@ class ChangePasswordFormType extends AbstractType
                 // Instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-            ])
-        ;
+            ]);
     }
 
     #[Override]

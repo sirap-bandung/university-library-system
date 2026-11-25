@@ -40,6 +40,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\Column(length: 255)]
     public string $password;
 
+    /**
+     * @var array<string>
+     */
     #[ORM\Column]
     public array $roles = [];
 

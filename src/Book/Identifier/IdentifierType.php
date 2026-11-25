@@ -52,6 +52,9 @@ abstract class IdentifierType
     #[ORM\JoinColumn(name: 'parent_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     public ?int $parent;
 
+    /**
+     * @var array<IdentifierType>
+     */
     #[ORM\OneToMany(targetEntity: IdentifierType::class, mappedBy: 'parent')]
     #[ORM\OrderBy(['left' => 'ASC'])]
     public array $children;

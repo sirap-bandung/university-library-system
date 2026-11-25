@@ -9,9 +9,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-/**
- * @template-extends AbstractType<ResetPasswordRequest>
- */
 class ResetPasswordRequestFormType extends AbstractType
 {
     #[Override]
@@ -25,8 +22,7 @@ class ResetPasswordRequestFormType extends AbstractType
                         message: 'Please enter your email',
                     ),
                 ],
-            ])
-        ;
+            ]);
     }
 
     #[Override]

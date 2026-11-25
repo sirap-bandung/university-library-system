@@ -51,6 +51,9 @@ abstract class RelationshipType
     #[ORM\JoinColumn(name: 'parent_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
     public ?int $parent;
 
+    /**
+     * @var array<RelationshipType>
+     */
     #[ORM\OneToMany(targetEntity: RelationshipType::class, mappedBy: 'parent')]
     #[ORM\OrderBy(['left' => 'ASC'])]
     public array $children;
