@@ -7,6 +7,9 @@ namespace App\Auth;
 use DateTime;
 use Doctrine\DBAL\Schema\DefaultExpression\CurrentTimestamp;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Override;
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface as TwoFactorTotpInterface;
 use Scheb\TwoFactorBundle\Model\Totp\TotpConfiguration;
 use Scheb\TwoFactorBundle\Model\Totp\TotpConfigurationInterface;
@@ -17,6 +20,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity]
 class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFactorEmailInterface, TwoFactorTotpInterface
 {
+    use SoftDeleteableEntity;
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -43,14 +49,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\Column(nullable: true)]
     public ?string $authCode;
 
-    #[ORM\Column(insertable: false, updatable: false, options: ['default' => new CurrentTimestamp()])]
-    public readonly DateTime $createdAt;
-
+    #[Override]
     public function getPassword(): ?string
     {
         return $this->password;
     }
 
+    #[Override]
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -60,40 +65,49 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         return array_unique($roles);
     }
 
+    #[Override]
     public function getUserIdentifier(): string
     {
         return $this->email;
     }
 
+    #[Override]
     public function isEmailAuthEnabled(): bool
     {
         return $this->email && $this->emailVerified;
     }
+
+    #[Override]
     public function isTotpAuthenticationEnabled(): bool
     {
         return (bool)$this->totpSecret;
     }
 
+    #[Override]
     public function getEmailAuthRecipient(): string
     {
         return $this->email;
     }
 
+    #[Override]
     public function getEmailAuthCode(): ?string
     {
         return $this->authCode;
     }
 
+    #[Override]
     public function setEmailAuthCode(string $authCode): void
     {
         $this->authCode = $authCode;
     }
 
+    #[Override]
     public function getTotpAuthenticationUsername(): ?string
     {
         return $this->username;
     }
 
+    #[Override]
     public function getTotpAuthenticationConfiguration(): ?TotpConfigurationInterface
     {
         $period = 30;

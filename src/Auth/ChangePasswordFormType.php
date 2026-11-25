@@ -2,6 +2,7 @@
 
 namespace App\Auth;
 
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -12,8 +13,12 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotCompromisedPassword;
 use Symfony\Component\Validator\Constraints\PasswordStrength;
 
+/**
+ * @template-extends AbstractType<?>
+ */
 class ChangePasswordFormType extends AbstractType
 {
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -31,9 +36,9 @@ class ChangePasswordFormType extends AbstractType
                         ),
                         new Length(
                             min: 12,
-                            minMessage: 'Your password should be at least {{ limit }} characters',
-                            // max length allowed by Symfony for security reasons
                             max: 4096,
+                            // max length allowed by Symfony for security reasons
+                            minMessage: 'Your password should be at least {{ limit }} characters',
                         ),
                         new PasswordStrength(),
                         new NotCompromisedPassword(),
@@ -51,6 +56,7 @@ class ChangePasswordFormType extends AbstractType
         ;
     }
 
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([]);

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Auth;
 
 use Doctrine\ORM\Mapping as ORM;
+use Override;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordRequestInterface;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordRequestTrait;
 
@@ -33,6 +34,7 @@ class ResetPasswordRequest implements ResetPasswordRequestInterface
         return $this->id;
     }
 
+    #[Override]
     public function getUser(): User
     {
         return $this->user;
