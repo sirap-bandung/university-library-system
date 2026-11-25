@@ -7,7 +7,12 @@ It features:
 - Book metadata management
 - Book browsing
 - Book inventory management
-- 
+- Borrowing and returns
+- Late returns reminders
+- Automatic late fee
+- Membership management
+- Facility management
+- Enquiries / Feedback management
 
 Book metadata is designed similar to [BookBrainz](https://bookbrainz.org/) schema.
 
@@ -21,7 +26,7 @@ Requirements
 <small>devcontainers docs still wip</small>
 
 - [Docker & Docker compose](https://docs.docker.com/engine/)
-- [PHP 8.6](https://www.php.net/)
+- [PHP 8.5](https://www.php.net/)
 - [xdebug](https://xdebug.org/)
 - [composer](https://getcomposer.org/)
 
