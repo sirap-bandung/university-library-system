@@ -9,6 +9,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+/**
+ * @psalm-suppress MissingTemplateParam
+ */
 class ResetPasswordRequestFormType extends AbstractType
 {
     #[Override]

@@ -13,6 +13,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotCompromisedPassword;
 use Symfony\Component\Validator\Constraints\PasswordStrength;
 
+/**
+ * @psalm-suppress MissingTemplateParam
+ */
 class ChangePasswordFormType extends AbstractType
 {
     #[Override]
