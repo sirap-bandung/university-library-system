@@ -8,11 +8,17 @@
     findUnusedBaselineEntry="true"
     findUnusedCode="true"
 >
+    <issueHandlers>
+        <UnusedClass errorLevel="info"/>
+        <PossiblyUnusedProperty errorLevel="info"/>
+        <PossiblyUnusedMethod errorLevel="info"/>
+    </issueHandlers>
+
     <projectFiles>
-        <directory name="src" />
+        <directory name="src"/>
         <ignoreFiles>
-            <directory name="vendor" />
-            <directory name="src/Infrastructure/Migrations" />
+            <directory name="vendor"/>
+            <directory name="src/Infrastructure/Migrations"/>
         </ignoreFiles>
     </projectFiles>
 </psalm>
