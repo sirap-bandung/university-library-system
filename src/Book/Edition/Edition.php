@@ -9,6 +9,7 @@ use App\Book\Identifier\IdentifierSet;
 use App\Book\Publisher\Publisher;
 use App\Book\Relationship\RelationshipSet;
 use DateTime;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -67,10 +68,10 @@ class Edition
     #[ORM\JoinColumn(name: 'relationship_set_id', referencedColumnName: 'id', nullable: true)]
     public ?RelationshipSet $relationshipSet;
 
-    /** @var array<Publisher> */
+    /** @var Collection<int, Publisher> */
     #[ORM\ManyToMany(targetEntity: Publisher::class, inversedBy: 'editions')]
     #[ORM\JoinTable(name: "edition_publishers")]
     #[ORM\JoinColumn(name: "edition_id", referencedColumnName: "id")]
     #[ORM\InverseJoinColumn(name: "publisher_id", referencedColumnName: "id")]
-    public array $publishers;
+    public Collection $publishers;
 }

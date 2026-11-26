@@ -8,6 +8,7 @@ use App\Book\Alias\AliasSet;
 use App\Book\Edition\Edition;
 use App\Book\Identifier\IdentifierSet;
 use App\Book\Relationship\RelationshipSet;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -42,7 +43,7 @@ class Publisher
     #[ORM\JoinColumn(name: 'relationship_set_id', referencedColumnName: 'id', nullable: true)]
     public ?RelationshipSet $relationshipSet;
 
-    /** @var array<Edition> */
+    /** @var Collection<int, Edition> */
     #[ORM\ManyToMany(targetEntity: Edition::class, mappedBy: 'publishers')]
-    public array $editions;
+    public Collection $editions;
 }

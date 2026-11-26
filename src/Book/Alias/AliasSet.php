@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Book\Alias;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -18,7 +19,7 @@ class AliasSet
     #[ORM\Column]
     public readonly ?int $id;
 
-    /** @var array<Alias> */
+    /** @var Collection<int, Alias> */
     #[ORM\OneToMany(targetEntity: Alias::class, mappedBy: 'set', cascade: ['persist', 'remove'], orphanRemoval: true)]
-    public array $aliases;
+    public Collection $aliases;
 }

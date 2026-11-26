@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Book\Relationship;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -18,12 +19,12 @@ class RelationshipSet
     #[ORM\Column]
     public readonly ?int $id;
 
-    /** @var array<Relationship> */
+    /** @var Collection<int, Relationship> */
     #[ORM\OneToMany(targetEntity: Relationship::class, mappedBy: 'sourceSet', cascade: ['persist', 'remove'], orphanRemoval: true)]
-    public array $sourceRelationships;
+    public Collection $sourceRelationships;
 
 
-    /** @var array<Relationship> */
+    /** @var Collection<int, Relationship> */
     #[ORM\OneToMany(targetEntity: Relationship::class, mappedBy: 'targetSet', cascade: ['persist', 'remove'], orphanRemoval: true)]
-    public array $targetRelationships;
+    public Collection $targetRelationships;
 }

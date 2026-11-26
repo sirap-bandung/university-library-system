@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Auth;
 
-use DateTime;
-use Doctrine\DBAL\Schema\DefaultExpression\CurrentTimestamp;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;

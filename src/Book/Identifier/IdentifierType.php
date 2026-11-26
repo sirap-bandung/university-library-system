@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Book\Identifier;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -57,9 +58,9 @@ abstract class IdentifierType
     public ?int $parent;
 
     /**
-     * @var array<IdentifierType>
+     * @var Collection<int, IdentifierType>
      */
     #[ORM\OneToMany(targetEntity: IdentifierType::class, mappedBy: 'parent')]
     #[ORM\OrderBy(['left' => 'ASC'])]
-    public array $children;
+    public Collection $children;
 }

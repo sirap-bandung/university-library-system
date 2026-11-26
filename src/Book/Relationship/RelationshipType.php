@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Book\Relationship;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -56,9 +57,9 @@ abstract class RelationshipType
     public ?int $parent;
 
     /**
-     * @var array<RelationshipType>
+     * @var Collection<int, RelationshipType>
      */
     #[ORM\OneToMany(targetEntity: RelationshipType::class, mappedBy: 'parent')]
     #[ORM\OrderBy(['left' => 'ASC'])]
-    public array $children;
+    public Collection $children;
 }
