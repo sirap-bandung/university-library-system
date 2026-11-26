@@ -13,7 +13,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 #[ORM\Entity]
 class WorkType
 {
-    public function __construct(?int $id = null) {
+    public function __construct(?int $id = null)
+    {
         $this->id = $id;
     }
 

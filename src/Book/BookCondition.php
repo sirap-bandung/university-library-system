@@ -9,7 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 class BookCondition
 {
-    public function __construct(?int $id = null) {
+    public function __construct(?int $id = null)
+    {
         $this->id = $id;
     }
 

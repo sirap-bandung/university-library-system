@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Auth;
 
+use DateTimeInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Override;
@@ -27,7 +28,7 @@ class ResetPasswordRequestRepository extends ServiceEntityRepository implements 
      * @param User $user
      */
     #[Override]
-    public function createResetPasswordRequest(object $user, \DateTimeInterface $expiresAt, string $selector, string $hashedToken): ResetPasswordRequestInterface
+    public function createResetPasswordRequest(object $user, DateTimeInterface $expiresAt, string $selector, string $hashedToken): ResetPasswordRequestInterface
     {
         return new ResetPasswordRequest($user, $expiresAt, $selector, $hashedToken);
     }

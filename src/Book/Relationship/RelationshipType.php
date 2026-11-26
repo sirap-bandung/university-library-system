@@ -22,7 +22,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 #[ORM\UniqueConstraint(columns: ['parent_id', 'child_order'])]
 abstract class RelationshipType
 {
-    public function __construct(?int $id = null) {
+    public function __construct(?int $id = null)
+    {
         $this->id = $id;
     }
 
