@@ -17,10 +17,14 @@ class Series
     use SoftDeleteableEntity;
     use TimestampableEntity;
 
+    public function __construct(?int $id = null) {
+        $this->id = $id;
+    }
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    public int $id;
+    public readonly ?int $id;
 
     #[ORM\OneToOne(targetEntity: AliasSet::class, orphanRemoval: true)]
     #[ORM\JoinColumn(name: 'alias_set_id', referencedColumnName: 'id')]

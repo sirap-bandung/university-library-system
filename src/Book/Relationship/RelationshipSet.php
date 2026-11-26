@@ -9,10 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 class RelationshipSet
 {
+    public function __construct(?int $id = null) {
+        $this->id = $id;
+    }
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    public int $id;
+    public readonly ?int $id;
 
     /** @var array<Relationship> */
     #[ORM\OneToMany(targetEntity: Relationship::class, mappedBy: 'sourceSet', cascade: ['persist', 'remove'], orphanRemoval: true)]

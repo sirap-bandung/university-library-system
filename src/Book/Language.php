@@ -9,10 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 class Language
 {
+    public function __construct(?int $id = null) {
+        $this->id = $id;
+    }
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    public int $id;
+    public readonly ?int $id;
 
     #[ORM\Column]
     public string $label;

@@ -15,10 +15,14 @@ class Book
     use SoftDeleteableEntity;
     use TimestampableEntity;
 
+    public function __construct(?int $id = null) {
+        $this->id = $id;
+    }
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    public int $id;
+    public readonly ?int $id;
 
     #[ORM\Column(nullable: true)]
     public ?string $comment;

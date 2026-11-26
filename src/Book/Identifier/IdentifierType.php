@@ -19,10 +19,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
 #[ORM\UniqueConstraint(columns: ['parent_id', 'child_order'])]
 abstract class IdentifierType
 {
+    public function __construct(?int $id = null) {
+        $this->id = $id;
+    }
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    public int $id;
+    public readonly ?int $id;
 
     #[ORM\Column]
     public string $label;
