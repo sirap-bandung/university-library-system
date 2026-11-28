@@ -3,6 +3,7 @@ namespace App\Tests;
 
 use App\Auth\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -12,6 +13,8 @@ class ResetPasswordControllerTest extends WebTestCase
 {
     private KernelBrowser $client;
     private EntityManagerInterface $em;
+    /** @var EntityRepository<User> */
+    private EntityRepository $userRepository;
 
     protected function setUp(): void
     {
